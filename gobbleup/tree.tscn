@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://dml2vr0d50dbq"]
+
+[ext_resource type="Texture2D" uid="uid://b82wo3cawvh8n" path="res://source/Sprites/tree.png" id="1_brfkd"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="MultiMeshInstance3D" type="MultiMeshInstance3D" parent="."]
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.01802, 0.354964, -0.0150485)
+texture = ExtResource("1_brfkd")

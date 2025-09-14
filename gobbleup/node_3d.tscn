@@ -1,17 +1,26 @@
-[gd_scene load_steps=4 format=3 uid="uid://dxapyagfqgoc0"]
+[gd_scene load_steps=7 format=3 uid="uid://dxapyagfqgoc0"]
+
+[ext_resource type="Texture2D" uid="uid://c3iigjatr0gyr" path="res://source/Sprites/grass.png" id="1_a202f"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_4xowi"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_4xowi"]
 size = Vector3(60, 1, 80)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_noarx"]
+albedo_texture = ExtResource("1_a202f")
+
 [sub_resource type="BoxMesh" id="BoxMesh_a202f"]
 size = Vector3(60, 1, 80)
+
+[sub_resource type="Environment" id="Environment_a202f"]
+background_mode = 1
+background_color = Color(0.234145, 0.529179, 0.786127, 1)
 
 [node name="Node3D" type="Node3D"]
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(-2.18557e-08, -0.866025, 0.5, -3.78552e-08, 0.5, 0.866026, -1, -2.51215e-15, -4.37114e-08, 20.1699, 15.6118, -0.530468)
+transform = Transform3D(-2.18557e-08, -0.866025, 0.5, -3.78552e-08, 0.5, 0.866025, -1, -1.95399e-14, -4.37114e-08, 29.3719, 33.0722, -0.530468)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 physics_material_override = SubResource("PhysicsMaterial_4xowi")
@@ -20,4 +29,11 @@ physics_material_override = SubResource("PhysicsMaterial_4xowi")
 shape = SubResource("BoxShape3D_4xowi")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+material_override = SubResource("StandardMaterial3D_noarx")
 mesh = SubResource("BoxMesh_a202f")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_a202f")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.110463, -0.960787, 0.254335, 0, 0.255901, 0.966703, -0.99388, -0.106785, 0.0282676, 0, 22.0673, 8.60018)
