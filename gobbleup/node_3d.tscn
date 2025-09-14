@@ -1,6 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://dxapyagfqgoc0"]
+[gd_scene load_steps=9 format=3 uid="uid://dxapyagfqgoc0"]
 
 [ext_resource type="Texture2D" uid="uid://c3iigjatr0gyr" path="res://source/Sprites/grass.png" id="1_a202f"]
+[ext_resource type="PackedScene" uid="uid://cyaa6okrt2xuj" path="res://turkeyplay.tscn" id="2_a0tk4"]
+[ext_resource type="PackedScene" uid="uid://dml2vr0d50dbq" path="res://tree.tscn" id="3_r3fl7"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_4xowi"]
 
@@ -37,3 +39,19 @@ environment = SubResource("Environment_a202f")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.110463, -0.960787, 0.254335, 0, 0.255901, 0.966703, -0.99388, -0.106785, 0.0282676, 0, 22.0673, 8.60018)
+shadow_bias = 0.235
+
+[node name="Node3D" parent="." instance=ExtResource("2_a0tk4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.36971, 0.75, -4.75769)
+
+[node name="Node3D2" parent="." instance=ExtResource("3_r3fl7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.46379, 0.5, -4.33778)
+
+[node name="Node3D3" parent="." instance=ExtResource("3_r3fl7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.96372, 0.5, -2.58411)
+
+[node name="Node3D4" parent="." instance=ExtResource("3_r3fl7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.862198, 0.5, -2.33632)
+
+[node name="Node3D5" parent="." instance=ExtResource("3_r3fl7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.743132, 0.520968, -4.17467)

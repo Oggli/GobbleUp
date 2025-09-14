@@ -8,6 +8,7 @@
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.01802, 0.354964, -0.0150485)
+billboard = 1
 texture_filter = 0
 texture = ExtResource("1_brfkd")
 metadata/_aseprite_wizard_interface_config_ = {
