@@ -1,6 +1,6 @@
 [gd_scene load_steps=15 format=3 uid="uid://cyaa6okrt2xuj"]
 
-[ext_resource type="Texture2D" uid="uid://dg0a52gthpxnd" path="res://source/Sprites/Layer 1.png" id="1_k6sdg"]
+[ext_resource type="Texture2D" uid="uid://dg0a52gthpxnd" path="res://source/Sprites/title.png" id="1_k6sdg"]
 [ext_resource type="Script" uid="uid://cppladdnoeoil" path="res://turkeyplayer.gd" id="1_p2oqo"]
 [ext_resource type="Texture2D" uid="uid://ctu2fcvote6yf" path="res://source/Sprites/legs.png" id="2_p2oqo"]
 

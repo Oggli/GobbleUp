@@ -1,9 +1,44 @@
-[gd_scene load_steps=9 format=3 uid="uid://dxapyagfqgoc0"]
+[gd_scene load_steps=14 format=3 uid="uid://dxapyagfqgoc0"]
 
 [ext_resource type="Script" uid="uid://dun7absyjygji" path="res://node_3d.gd" id="1_a0tk4"]
 [ext_resource type="Texture2D" uid="uid://c3iigjatr0gyr" path="res://source/Sprites/grass.png" id="1_a202f"]
+[ext_resource type="Texture2D" uid="uid://dg0a52gthpxnd" path="res://source/Sprites/title.png" id="2_a0tk4"]
 
 [sub_resource type="Environment" id="Environment_noarx"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r3fl7"]
+atlas = ExtResource("2_a0tk4")
+region = Rect2(0, 0, 800, 600)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jka67"]
+atlas = ExtResource("2_a0tk4")
+region = Rect2(800, 0, 800, 600)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i5arm"]
+atlas = ExtResource("2_a0tk4")
+region = Rect2(0, 600, 800, 600)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wc5p8"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r3fl7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jka67")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i5arm")
+}],
+"loop": true,
+"name": &"title",
+"speed": 3.0
+}]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_4xowi"]
 
@@ -28,6 +63,13 @@ script = ExtResource("1_a0tk4")
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.899474, 0.436974, 0, -0.436974, 0.899474, -0.0328903, 4.43364, 5.51352)
 environment = SubResource("Environment_noarx")
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0645713, -3.82475)
+sprite_frames = SubResource("SpriteFrames_wc5p8")
+animation = &"title"
+autoplay = "title"
+frame_progress = 0.190448
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 transform = Transform3D(0.378227, 0, 0, 0, 1, 0, 0, 0, 0.216666, 0, 0, 0)
