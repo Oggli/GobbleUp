@@ -26,7 +26,7 @@ ambient_light_energy = 5.61
 script = ExtResource("1_a0tk4")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.456617, 0.889664, 0, -0.889664, 0.456617, 0, 4.38146, 5.52271)
+transform = Transform3D(1, 0, 0, 0, 0.899474, 0.436974, 0, -0.436974, 0.899474, -0.0328903, 4.43364, 5.51352)
 environment = SubResource("Environment_noarx")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
@@ -44,6 +44,6 @@ mesh = SubResource("BoxMesh_a202f")
 environment = SubResource("Environment_a202f")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.110463, -0.960787, 0.254335, 0, 0.255901, 0.966703, -0.99388, -0.106785, 0.0282676, 0, 22.0673, 8.60018)
+transform = Transform3D(-0.961451, -0.177639, 0.209898, 0.274777, -0.649786, 0.708713, 0.0104937, 0.739068, 0.673549, 0.648899, 4.1468, 7.82354)
 shadow_enabled = true
 shadow_bias = 0.235

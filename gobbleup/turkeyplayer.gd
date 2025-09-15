@@ -20,15 +20,33 @@ func _physics_process(delta):
 	if player_id == 1:
 		movement_input = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 	
+	
 	var direction = Vector3(movement_input.x, 0, movement_input.y).normalized()
+	
 
+	
 	if direction:
 		velocity.x = direction.x * speed
 		velocity.z = direction.z * speed
+		
 	else:
 		velocity.x = move_toward(velocity.x, 0, speed * friction)
 		velocity.z = move_toward(velocity.z, 0, speed * friction)
-
+		
+	# this is bad plz fix
+	if velocity.x>0.0:
+		$CollisionShape3D/head.flip_h=0
+		$CollisionShape3D/body.flip_h=0
+		$CollisionShape3D/legs.flip_h=0
+		$CollisionShape3D/wings.flip_h=0
+		$CollisionShape3D/tail.flip_h=0
+	elif velocity.x<0.0:
+		$CollisionShape3D/head.flip_h=1
+		$CollisionShape3D/body.flip_h=1
+		$CollisionShape3D/legs.flip_h=1
+		$CollisionShape3D/wings.flip_h=1
+		$CollisionShape3D/tail.flip_h=1
+		
 	move_and_slide()
 
 

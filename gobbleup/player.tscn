@@ -67,7 +67,7 @@ animations = [{
 
 [node name="RigidBody3D" type="CharacterBody3D" groups=["players"]]
 script = ExtResource("1_i3pqv")
-speed = 30.0
+speed = 5.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0274048, 0)
@@ -76,6 +76,7 @@ shape = SubResource("CylinderShape3D_2hs0m")
 [node name="head" type="AnimatedSprite3D" parent="CollisionShape3D"]
 transform = Transform3D(1.62602, 0, 0, 0, 1.62602, 0, 0, 0, 1.62602, 0, 0.0445606, 0)
 billboard = 1
+alpha_cut = 2
 texture_filter = 0
 sprite_frames = SubResource("SpriteFrames_urp6f")
 animation = &"head"
@@ -83,13 +84,16 @@ animation = &"head"
 [node name="body" type="AnimatedSprite3D" parent="CollisionShape3D"]
 transform = Transform3D(1.62602, 0, 0, 0, 1.62602, 0, 0, 0, 1.62602, 0, 0.0445606, 0)
 billboard = 1
+alpha_cut = 2
 texture_filter = 0
+render_priority = 1
 sprite_frames = SubResource("SpriteFrames_urp6f")
 animation = &"body"
 
 [node name="legs" type="AnimatedSprite3D" parent="CollisionShape3D"]
 transform = Transform3D(1.62602, 0, 0, 0, 1.62602, 0, 0, 0, 1.62602, 0, 0.0445606, 0)
 billboard = 1
+alpha_cut = 2
 texture_filter = 0
 sprite_frames = SubResource("SpriteFrames_urp6f")
 animation = &"legs"
@@ -98,13 +102,17 @@ autoplay = "legs"
 [node name="wings" type="AnimatedSprite3D" parent="CollisionShape3D"]
 transform = Transform3D(1.62602, 0, 0, 0, 1.62602, 0, 0, 0, 1.62602, 0, 0.0445606, 0)
 billboard = 1
+alpha_cut = 2
 texture_filter = 0
+render_priority = 2
 sprite_frames = SubResource("SpriteFrames_urp6f")
 animation = &"wings"
 
 [node name="tail" type="AnimatedSprite3D" parent="CollisionShape3D"]
 transform = Transform3D(1.62602, 0, 0, 0, 1.62602, 0, 0, 0, 1.62602, 0, 0.0445606, 0)
 billboard = 1
+alpha_cut = 2
 texture_filter = 0
+render_priority = 3
 sprite_frames = SubResource("SpriteFrames_urp6f")
 animation = &"tail"
