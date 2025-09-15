@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://iu6ayw8887lt"
-path.s3tc="res://.godot/imported/Body.png-93ef7a1271bbd3d6cd138c2ecb040ef2.s3tc.ctex"
+uid="uid://c0bu76q7df5d4"
+path.s3tc="res://.godot/imported/Wing.png-383776ba6c3bdd1bd2aca5c7dd6726db.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://source/Sprites/Body.png"
-dest_files=["res://.godot/imported/Body.png-93ef7a1271bbd3d6cd138c2ecb040ef2.s3tc.ctex"]
+source_file="res://source/Sprites/Wing.png"
+dest_files=["res://.godot/imported/Wing.png-383776ba6c3bdd1bd2aca5c7dd6726db.s3tc.ctex"]
 
 [params]
 

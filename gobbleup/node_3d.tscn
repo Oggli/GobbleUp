@@ -1,8 +1,9 @@
 [gd_scene load_steps=9 format=3 uid="uid://dxapyagfqgoc0"]
 
+[ext_resource type="Script" uid="uid://dun7absyjygji" path="res://node_3d.gd" id="1_a0tk4"]
 [ext_resource type="Texture2D" uid="uid://c3iigjatr0gyr" path="res://source/Sprites/grass.png" id="1_a202f"]
-[ext_resource type="PackedScene" uid="uid://cyaa6okrt2xuj" path="res://turkeyplay.tscn" id="2_a0tk4"]
-[ext_resource type="PackedScene" uid="uid://dml2vr0d50dbq" path="res://tree.tscn" id="3_r3fl7"]
+
+[sub_resource type="Environment" id="Environment_noarx"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_4xowi"]
 
@@ -18,13 +19,18 @@ size = Vector3(60, 1, 80)
 [sub_resource type="Environment" id="Environment_a202f"]
 background_mode = 1
 background_color = Color(0.234145, 0.529179, 0.786127, 1)
+ambient_light_color = Color(0.746954, 0.555336, 0, 1)
+ambient_light_energy = 5.61
 
 [node name="Node3D" type="Node3D"]
+script = ExtResource("1_a0tk4")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(-2.18557e-08, -0.866025, 0.5, -3.78552e-08, 0.5, 0.866025, -1, -1.95399e-14, -4.37114e-08, 29.3719, 33.0722, -0.530468)
+transform = Transform3D(1, 0, 0, 0, 0.456617, 0.889664, 0, -0.889664, 0.456617, 0, 4.38146, 5.52271)
+environment = SubResource("Environment_noarx")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(0.378227, 0, 0, 0, 1, 0, 0, 0, 0.216666, 0, 0, 0)
 physics_material_override = SubResource("PhysicsMaterial_4xowi")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
@@ -39,19 +45,5 @@ environment = SubResource("Environment_a202f")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.110463, -0.960787, 0.254335, 0, 0.255901, 0.966703, -0.99388, -0.106785, 0.0282676, 0, 22.0673, 8.60018)
+shadow_enabled = true
 shadow_bias = 0.235
-
-[node name="Node3D" parent="." instance=ExtResource("2_a0tk4")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.36971, 0.75, -4.75769)
-
-[node name="Node3D2" parent="." instance=ExtResource("3_r3fl7")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.46379, 0.5, -4.33778)
-
-[node name="Node3D3" parent="." instance=ExtResource("3_r3fl7")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.96372, 0.5, -2.58411)
-
-[node name="Node3D4" parent="." instance=ExtResource("3_r3fl7")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.862198, 0.5, -2.33632)
-
-[node name="Node3D5" parent="." instance=ExtResource("3_r3fl7")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.743132, 0.520968, -4.17467)

@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://iu6ayw8887lt"
-path.s3tc="res://.godot/imported/Body.png-93ef7a1271bbd3d6cd138c2ecb040ef2.s3tc.ctex"
+uid="uid://ednncptcx654"
+path.s3tc="res://.godot/imported/head.png-a91e60ca1f5a0c91ff5cdd8cf5da30c0.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://source/Sprites/Body.png"
-dest_files=["res://.godot/imported/Body.png-93ef7a1271bbd3d6cd138c2ecb040ef2.s3tc.ctex"]
+source_file="res://source/Sprites/head.png"
+dest_files=["res://.godot/imported/head.png-a91e60ca1f5a0c91ff5cdd8cf5da30c0.s3tc.ctex"]
 
 [params]
 
