@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://brg5tx7e0xy8"
-path.s3tc="res://.godot/imported/Legs.png-ba84c5f2bc0148953896d6b22f5922c8.s3tc.ctex"
+uid="uid://ctu2fcvote6yf"
+path.s3tc="res://.godot/imported/legs.png-7b36097c89e4f579f23266a3abe2bdc1.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://source/Sprites/Legs.png"
-dest_files=["res://.godot/imported/Legs.png-ba84c5f2bc0148953896d6b22f5922c8.s3tc.ctex"]
+source_file="res://source/Sprites/legs.png"
+dest_files=["res://.godot/imported/legs.png-7b36097c89e4f579f23266a3abe2bdc1.s3tc.ctex"]
 
 [params]
 
