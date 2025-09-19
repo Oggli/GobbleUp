@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://c4wky3056ti2t"
+path="res://.godot/imported/gobble_title.aseprite-7d3a4aa8411af206811b519fdf6cc8de.res"
+
+[deps]
+
+source_file="res://source/Sprites/gobble_title.aseprite"
+dest_files=["res://.godot/imported/gobble_title.aseprite-7d3a4aa8411af206811b519fdf6cc8de.res"]
+
+[params]
+

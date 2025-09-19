@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://braajywylpenl"
+path="res://.godot/imported/turkeynew.aseprite-b8090e09237f6b6efe135b4b46268b88.res"
+
+[deps]
+
+source_file="res://source/Sprites/turkeynew.aseprite"
+dest_files=["res://.godot/imported/turkeynew.aseprite-b8090e09237f6b6efe135b4b46268b88.res"]
+
+[params]
+

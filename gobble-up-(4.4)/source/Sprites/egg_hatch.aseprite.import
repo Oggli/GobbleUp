@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://lsdw28qhn87u"
+path="res://.godot/imported/egg_hatch.aseprite-438aab6707ac9f357b236a5548e54356.res"
+
+[deps]
+
+source_file="res://source/Sprites/egg_hatch.aseprite"
+dest_files=["res://.godot/imported/egg_hatch.aseprite-438aab6707ac9f357b236a5548e54356.res"]
+
+[params]
+

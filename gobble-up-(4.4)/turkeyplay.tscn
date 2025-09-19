@@ -1,0 +1,104 @@
+[gd_scene load_steps=15 format=3 uid="uid://cyaa6okrt2xuj"]
+
+[ext_resource type="Texture2D" uid="uid://dg0a52gthpxnd" path="res://source/Sprites/title.png" id="1_k6sdg"]
+[ext_resource type="Script" uid="uid://cppladdnoeoil" path="res://turkeyplayer.gd" id="1_p2oqo"]
+[ext_resource type="Texture2D" uid="uid://ctu2fcvote6yf" path="res://source/Sprites/legs.png" id="2_p2oqo"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_4o0q2"]
+height = 0.418091
+radius = 0.366699
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i60uc"]
+atlas = ExtResource("1_k6sdg")
+region = Rect2(0, 0, 70, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_btdud"]
+atlas = ExtResource("1_k6sdg")
+region = Rect2(70, 0, 70, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k0tkq"]
+atlas = ExtResource("1_k6sdg")
+region = Rect2(140, 0, 70, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lbewd"]
+atlas = ExtResource("1_k6sdg")
+region = Rect2(0, 50, 70, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qoa75"]
+atlas = ExtResource("1_k6sdg")
+region = Rect2(70, 50, 70, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o7fiw"]
+atlas = ExtResource("1_k6sdg")
+region = Rect2(140, 50, 70, 50)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_f2o0b"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i60uc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_btdud")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k0tkq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lbewd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qoa75")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o7fiw")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m4rh0"]
+atlas = ExtResource("2_p2oqo")
+region = Rect2(70, 0, 70, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qjmah"]
+atlas = ExtResource("2_p2oqo")
+region = Rect2(0, 50, 70, 50)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_w6l5t"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m4rh0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qjmah")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="RigidBody3D" type="RigidBody3D" parent="."]
+script = ExtResource("1_p2oqo")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+transform = Transform3D(0.615, 0, 0, 0, 0.615, 0, 0, 0, 0.615, 0, -0.0274048, 0)
+shape = SubResource("CylinderShape3D_4o0q2")
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
+billboard = 1
+texture_filter = 0
+sprite_frames = SubResource("SpriteFrames_f2o0b")
+frame = 4
+frame_progress = 0.668599
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="AnimatedSprite3D"]
+billboard = 1
+texture_filter = 0
+sprite_frames = SubResource("SpriteFrames_w6l5t")
+frame = 1
+frame_progress = 0.380474

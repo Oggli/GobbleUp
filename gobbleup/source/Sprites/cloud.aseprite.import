@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://b7iw32pmiunix"
+path="res://.godot/imported/cloud.aseprite-e8f00906756dc3e95b004abee6f9fece.res"
+
+[deps]
+
+source_file="res://source/Sprites/cloud.aseprite"
+dest_files=["res://.godot/imported/cloud.aseprite-e8f00906756dc3e95b004abee6f9fece.res"]
+
+[params]
+
