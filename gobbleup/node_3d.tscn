@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://dxapyagfqgoc0"]
+[gd_scene load_steps=26 format=3 uid="uid://dxapyagfqgoc0"]
 
 [ext_resource type="Script" uid="uid://dun7absyjygji" path="res://node_3d.gd" id="1_a0tk4"]
 [ext_resource type="Texture2D" uid="uid://c3iigjatr0gyr" path="res://source/Sprites/grass.png" id="1_a202f"]
@@ -119,8 +119,6 @@ background_color = Color(0.234145, 0.529179, 0.786127, 1)
 ambient_light_color = Color(0.746954, 0.555336, 0, 1)
 ambient_light_energy = 5.61
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_wc5p8"]
-
 [node name="Node3D" type="Node3D"]
 script = ExtResource("1_a0tk4")
 
@@ -181,6 +179,3 @@ transform = Transform3D(-0.961451, -0.177639, 0.209898, 0.274777, -0.649786, 0.7
 light_color = Color(1, 0.897248, 0.986769, 1)
 shadow_enabled = true
 shadow_bias = 0.235
-
-[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
-process_material = SubResource("ParticleProcessMaterial_wc5p8")

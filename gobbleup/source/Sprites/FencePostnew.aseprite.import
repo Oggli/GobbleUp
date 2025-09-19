@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://1hpbms540msr"
+path="res://.godot/imported/FencePostnew.aseprite-f7179ff80e133125c4319a82c996a439.res"
+
+[deps]
+
+source_file="res://source/Sprites/FencePostnew.aseprite"
+dest_files=["res://.godot/imported/FencePostnew.aseprite-f7179ff80e133125c4319a82c996a439.res"]
+
+[params]
+
