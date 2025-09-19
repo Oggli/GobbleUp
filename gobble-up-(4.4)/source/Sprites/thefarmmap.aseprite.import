@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://b1qr80d8phexg"
+path="res://.godot/imported/thefarmmap.aseprite-474326741e5519bd77eb08840785e728.res"
+
+[deps]
+
+source_file="res://source/Sprites/thefarmmap.aseprite"
+dest_files=["res://.godot/imported/thefarmmap.aseprite-474326741e5519bd77eb08840785e728.res"]
+
+[params]
+

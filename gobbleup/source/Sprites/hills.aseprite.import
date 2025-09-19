@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://o8v0esb14dhq"
+path="res://.godot/imported/hills.aseprite-a5d3a47370363921899972cb17b3d71c.res"
+
+[deps]
+
+source_file="res://source/Sprites/hills.aseprite"
+dest_files=["res://.godot/imported/hills.aseprite-a5d3a47370363921899972cb17b3d71c.res"]
+
+[params]
+

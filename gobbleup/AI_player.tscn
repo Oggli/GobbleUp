@@ -68,6 +68,9 @@ animations = [{
 [node name="RigidBody3D" type="CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00130332, -0.00497651, 0.00238609)
 script = ExtResource("1_c04ls")
+speed = null
+friction = null
+wander_change_interval = null
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0274048, 0)
