@@ -13,7 +13,7 @@ var size := 0
 
 func _ready():
 	print("Player ", player_id, " spawned with ", size, " size.")
-	add_to_group("player_" + str(player_id))
+	add_to_group("player_" + str(player_id)) 
 	add_to_group("players")
 
 func _physics_process(delta: float):
