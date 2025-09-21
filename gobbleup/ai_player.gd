@@ -1,64 +1,109 @@
-extends CharacterBody3D
 
-## --- AI Configuration ---
-@export var speed := 8.0
-@export var friction := 0.1
-@export var wander_change_interval := 2.0
+extends RigidBody3D
 
 
-var player_target = null
+@export var speed := 20.0
+@export var wander_change_interval := 3.0
+
+
+enum State { WANDERING, PUSHING_TO_FOOD }
+
+var current_state := State.WANDERING
 var wander_direction := Vector3.ZERO
+var food_target: Node3D = null
+var push_target: RigidBody3D = null
 
-
-@onready var wander_timer := Timer.new()
-
+@onready var wander_timer: Timer = $WanderTimer
+@onready var food_detector: Area3D = $FoodDetector
+@onready var sprite: Sprite3D = $Sprite3D
 
 func _ready():
 	print("AI Turkey spawned.")
-	add_to_group("players")
-
-	player_target = get_tree().get_first_node_in_group("player_1")
-
+	add_to_group("players") 
 	wander_timer.wait_time = wander_change_interval
-	wander_timer.one_shot = false 
 	wander_timer.timeout.connect(_on_wander_timer_timeout)
-	add_child(wander_timer)
 	wander_timer.start()
 	_pick_random_direction()
+	
+	food_detector.body_entered.connect(_on_food_detector_body_entered)
+	food_detector.body_exited.connect(_on_food_detector_body_exited)
 
 
 func _physics_process(delta: float):
-	var direction := Vector3.ZERO
+	match current_state:
+		State.WANDERING:
+			linear_velocity += wander_direction * speed * delta
+
+		State.PUSHING_TO_FOOD:
+			if is_instance_valid(food_target) and is_instance_valid(push_target):
+
+				var player_pos = push_target.global_position
+				var food_pos = food_target.global_position
+				var ram_direction = (player_pos - food_pos).normalized()
+				var ram_position = player_pos + ram_direction
+				
+
+				var direction_to_ram = (ram_position - global_position).normalized()
+				linear_velocity += direction_to_ram * speed * delta
+			else:
+
+				find_new_targets()
+
+
+
+	if abs(linear_velocity.x) > 0.1:
+		sprite.flip_h = linear_velocity.x < 0.0
+
+
+
+func _on_food_detector_body_entered(body: Node):
+	if body.is_in_group("food"):
+		print("AI detected food!")
+		current_state = State.PUSHING_TO_FOOD
+		find_new_targets()
+
+func _on_food_detector_body_exited(body: Node):
+	if body == food_target:
+		print("AI lost food target.")
+		food_target = null
+		push_target = null
+		current_state = State.WANDERING
+
+func find_new_targets():
+	var overlapping_bodies = food_detector.get_overlapping_bodies()
 	
 
-	if is_instance_valid(player_target):
-		direction = (player_target.global_position - global_position).normalized()
-	else:
-		direction = wander_direction
+	var closest_food: Node3D = null
+	var min_dist_sq = INF
+	for body in overlapping_bodies:
+		if body.is_in_group("food"):
+			var dist_sq = global_position.distance_squared_to(body.global_position)
+			if dist_sq < min_dist_sq:
+				min_dist_sq = dist_sq
+				closest_food = body
+	food_target = closest_food
 
 
-	if direction != Vector3.ZERO:
-		velocity.x = direction.x * speed
-		velocity.z = direction.z * speed
-	else:
-		velocity = velocity.lerp(Vector3.ZERO, friction)
-		
+	var closest_player: RigidBody3D = null
+	min_dist_sq = INF
+	for body in overlapping_bodies:
+		if body.is_in_group("players") and body != self:
+			var dist_sq = global_position.distance_squared_to(body.global_position)
+			if dist_sq < min_dist_sq:
+				min_dist_sq = dist_sq
+				closest_player = body
+	push_target = closest_player
+	
 
-	if abs(velocity.x) > 0.1: 
-		var should_flip = velocity.x < 0.0
-		for sprite in $CollisionShape3D.get_children():
-			if "flip_h" in sprite: 
-				sprite.flip_h = should_flip
+	if not is_instance_valid(food_target) or not is_instance_valid(push_target):
+		current_state = State.WANDERING
 
-	move_and_slide()
+
 
 
 func _on_wander_timer_timeout():
-	if not is_instance_valid(player_target):
-		_pick_random_direction()
-
+	_pick_random_direction()
 
 func _pick_random_direction():
-	var random_x = randf_range(-1.0, 1.0)
-	var random_z = randf_range(-1.0, 1.0)
-	wander_direction = Vector3(random_x, 0, random_z).normalized()
+	var random_angle = randf_range(0, TAU) 
+	wander_direction = Vector3(cos(random_angle), 0, sin(random_angle))

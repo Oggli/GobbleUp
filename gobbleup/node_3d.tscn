@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://c3iigjatr0gyr" path="res://source/Sprites/grass.png" id="1_a202f"]
 [ext_resource type="Texture2D" uid="uid://dg0a52gthpxnd" path="res://source/Sprites/title.png" id="2_a0tk4"]
 [ext_resource type="Texture2D" uid="uid://urrs00imc3gx" path="res://source/Sprites/hills.png" id="2_jka67"]
+[ext_resource type="Texture2D" uid="uid://00wtmd75kaec" path="res://source/Sprites/Layer 1.png" id="3_jsk3o"]
 [ext_resource type="AudioStream" uid="uid://cgiqms4u6x02q" path="res://source/Audio/Soundtrack/GobbleNoMore With VOICE.ogg" id="4_r3fl7"]
 [ext_resource type="Texture2D" uid="uid://c15kebgjltkts" path="res://source/Sprites/btn_back.png" id="5_wc5p8"]
 [ext_resource type="Texture2D" uid="uid://b1xlrvuv2630s" path="res://source/Sprites/btn_1ply.png" id="6_jsk3o"]
@@ -102,8 +103,6 @@ animations = [{
 "speed": 3.0
 }]
 
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_4xowi"]
-
 [sub_resource type="BoxShape3D" id="BoxShape3D_4xowi"]
 size = Vector3(60, 1, 80)
 
@@ -121,17 +120,34 @@ ambient_light_energy = 5.61
 
 [node name="Node3D" type="Node3D"]
 script = ExtResource("1_a0tk4")
+spawn_radius = 4.0
 
 [node name="hills" type="Sprite3D" parent="."]
-transform = Transform3D(-1.72486, 0.0622582, 0.387269, 0.0218787, 1.57304, -0.307603, -0.32724, -0.222987, -2.06184, 11.6359, 2.94734, -8.17102)
+transform = Transform3D(-1.6470981, -0.061457727, -0.7297658, 0.02187871, 1.5730399, -0.30760294, 0.6076967, -0.22320896, -1.9668767, -5.816085, 2.94734, -8.17102)
 texture = ExtResource("2_jka67")
 
 [node name="Sprite3D" type="Sprite3D" parent="hills"]
 transform = Transform3D(-1.73695, 0.086317, -0.287336, 0.129313, 1.56946, -0.301577, 0.221303, -0.239593, -2.079, 10.0012, -0.168994, -1.05449)
 texture = ExtResource("2_jka67")
 
+[node name="Sprite3D2" type="Sprite3D" parent="hills"]
+transform = Transform3D(-1.7403661, 0.067018375, 0.26551253, 0.04145185, 1.572498, -0.30960315, -0.22824955, -0.2254292, -2.0807202, 1.9792087, 1.3031836, 7.3580375)
+texture = ExtResource("3_jsk3o")
+
+[node name="hills2" type="Sprite3D" parent="."]
+transform = Transform3D(-1.5016143, 0.13628638, 1.083656, 0.02187871, 1.5730399, -0.30760294, -0.90960586, -0.18715052, -1.7963443, 9.986649, 2.94734, -6.016591)
+texture = ExtResource("2_jka67")
+
+[node name="Sprite3D" type="Sprite3D" parent="hills2"]
+transform = Transform3D(-1.73695, 0.086317, -0.287336, 0.129313, 1.56946, -0.301577, 0.221303, -0.239593, -2.079, 10.0012, -0.168994, -1.05449)
+texture = ExtResource("2_jka67")
+
+[node name="Sprite3D2" type="Sprite3D" parent="hills2"]
+transform = Transform3D(-1.7403661, 0.067018375, 0.26551253, 0.04145185, 1.572498, -0.30960315, -0.22824955, -0.2254292, -2.0807202, 1.9792087, 1.3031836, 7.3580375)
+texture = ExtResource("3_jsk3o")
+
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.899474, 0.436974, 0, -0.436974, 0.899474, -0.0328903, 4.43364, 5.51352)
+transform = Transform3D(1, 0, 0, 0, 0.84405684, 0.5362537, 0, -0.5362537, 0.84405684, -0.0328903, 6.5358176, 8.301577)
 environment = SubResource("Environment_noarx")
 
 [node name="GobbleNoMoreWithVoice" type="AudioStreamPlayer" parent="Camera3D"]
@@ -162,12 +178,51 @@ frame_progress = 0.918701
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 transform = Transform3D(0.581957, 0, 0, 0, 1, 0, 0, 0, 0.216666, 0, 0, 0)
-physics_material_override = SubResource("PhysicsMaterial_4xowi")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
 shape = SubResource("BoxShape3D_4xowi")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+material_override = SubResource("StandardMaterial3D_noarx")
+mesh = SubResource("BoxMesh_a202f")
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="."]
+transform = Transform3D(0.21326615, 0, 0, 0, 1, 0, 0, 0, 0.04766016, 0, 0.9278846, -4.1819057)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D2"]
+shape = SubResource("BoxShape3D_4xowi")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D2"]
+material_override = SubResource("StandardMaterial3D_noarx")
+mesh = SubResource("BoxMesh_a202f")
+
+[node name="StaticBody3D3" type="StaticBody3D" parent="."]
+transform = Transform3D(0.21326615, 0, 0, 0, 1, 0, 0, 0, 0.04766016, 0, 0.9278846, 7.2701464)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D3"]
+shape = SubResource("BoxShape3D_4xowi")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D3"]
+material_override = SubResource("StandardMaterial3D_noarx")
+mesh = SubResource("BoxMesh_a202f")
+
+[node name="StaticBody3D4" type="StaticBody3D" parent="."]
+transform = Transform3D(-0.028889062, 0, 0, 0, 1, 0, 0, 0, 0.12947693, 5.982399, 0.9278846, 2.2870293)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D4"]
+shape = SubResource("BoxShape3D_4xowi")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D4"]
+material_override = SubResource("StandardMaterial3D_noarx")
+mesh = SubResource("BoxMesh_a202f")
+
+[node name="StaticBody3D5" type="StaticBody3D" parent="."]
+transform = Transform3D(0.03034372, 0, 0, 0, 1, 0, 0, 0, 0.12947693, -5.8269053, 0.9278846, 2.2870293)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D5"]
+shape = SubResource("BoxShape3D_4xowi")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D5"]
 material_override = SubResource("StandardMaterial3D_noarx")
 mesh = SubResource("BoxMesh_a202f")
 

@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://budlui7otju0k"
+path="res://.godot/imported/FoodApple.aseprite-8a70fbb581d71cb56c0a4020bf0ee9ea.res"
+
+[deps]
+
+source_file="res://source/Sprites/FoodApple.aseprite"
+dest_files=["res://.godot/imported/FoodApple.aseprite-8a70fbb581d71cb56c0a4020bf0ee9ea.res"]
+
+[params]
+
