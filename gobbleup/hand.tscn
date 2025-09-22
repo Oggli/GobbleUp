@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://uerpca1hcvb2"]
+
+[ext_resource type="Script" uid="uid://bbt8wst71m6gq" path="res://hand.gd" id="1_u4p2i"]
+[ext_resource type="Texture2D" uid="uid://pokdiq5jn26n" path="res://source/Sprites/hand.png" id="2_bfasp"]
+
+[node name="Hand" type="Node3D"]
+script = ExtResource("1_u4p2i")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(3.8606668, 0, 0, 0, 4.8438883, 0, 0, 0, 1, 0, 0, 0)
+billboard = 1
+texture_filter = 0
+texture = ExtResource("2_bfasp")

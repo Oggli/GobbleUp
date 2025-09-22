@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://cqgdo65so8o5i"]
+[gd_scene load_steps=11 format=3 uid="uid://cqgdo65so8o5i"]
 
 [ext_resource type="Script" uid="uid://bym6ttweafo7i" path="res://turkeyplayer.gd" id="1_i3pqv"]
 [ext_resource type="Texture2D" uid="uid://iu6ayw8887lt" path="res://source/Sprites/Body.png" id="2_2hs0m"]
@@ -6,10 +6,6 @@
 [ext_resource type="Texture2D" uid="uid://brg5tx7e0xy8" path="res://source/Sprites/legs.png" id="4_dw050"]
 [ext_resource type="Texture2D" uid="uid://dusqasuqa6n3w" path="res://source/Sprites/Tail.png" id="5_b26j0"]
 [ext_resource type="Texture2D" uid="uid://c0bu76q7df5d4" path="res://source/Sprites/Wing.png" id="6_n7ghd"]
-
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_2hs0m"]
-friction = 0.5
-bounce = 0.8
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_2hs0m"]
 height = 0.418091
@@ -69,13 +65,16 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="RigidBody3D" type="RigidBody3D" groups=["players"]]
+[node name="player" type="CharacterBody3D" groups=["players"]]
 axis_lock_linear_y = true
 axis_lock_angular_x = true
 axis_lock_angular_z = true
-physics_material_override = SubResource("PhysicsMaterial_2hs0m")
 script = ExtResource("1_i3pqv")
 speed = 5.0
+player_id = null
+knockback_decay = null
+knockback_multiplier = null
+push_force = 20.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0274048, 0)

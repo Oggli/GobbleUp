@@ -1,0 +1,52 @@
+[gd_scene load_steps=7 format=3 uid="uid://cdmdmvrx12ay7"]
+
+[ext_resource type="Script" uid="uid://ba0jhmwxms1go" path="res://sun.gd" id="1_h02is"]
+[ext_resource type="Texture2D" uid="uid://dup4a0if6578o" path="res://source/Sprites/sun.png" id="2_wmh3l"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8dk74"]
+atlas = ExtResource("2_wmh3l")
+region = Rect2(0, 0, 52, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_35gs3"]
+atlas = ExtResource("2_wmh3l")
+region = Rect2(52, 0, 52, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ewyfu"]
+atlas = ExtResource("2_wmh3l")
+region = Rect2(0, 48, 52, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ofngc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8dk74")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_35gs3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ewyfu")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]
+
+[node name="SunRotator" type="Node3D"]
+script = ExtResource("1_h02is")
+
+[node name="moon" type="AnimatedSprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6306481, 0, 0)
+billboard = 1
+texture_filter = 0
+sprite_frames = SubResource("SpriteFrames_ofngc")
+autoplay = "default"
+frame_progress = 0.8416808
+
+[node name="sun" type="AnimatedSprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.3335333, 0, 0)
+billboard = 1
+texture_filter = 0
+sprite_frames = SubResource("SpriteFrames_ofngc")
+autoplay = "default"
+frame_progress = 0.4428355

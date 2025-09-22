@@ -1,13 +1,20 @@
-[gd_scene load_steps=26 format=3 uid="uid://dxapyagfqgoc0"]
+[gd_scene load_steps=34 format=3 uid="uid://dxapyagfqgoc0"]
 
 [ext_resource type="Script" uid="uid://dun7absyjygji" path="res://node_3d.gd" id="1_a0tk4"]
 [ext_resource type="Texture2D" uid="uid://c3iigjatr0gyr" path="res://source/Sprites/grass.png" id="1_a202f"]
 [ext_resource type="Texture2D" uid="uid://dg0a52gthpxnd" path="res://source/Sprites/title.png" id="2_a0tk4"]
 [ext_resource type="Texture2D" uid="uid://urrs00imc3gx" path="res://source/Sprites/hills.png" id="2_jka67"]
-[ext_resource type="Texture2D" uid="uid://00wtmd75kaec" path="res://source/Sprites/Layer 1.png" id="3_jsk3o"]
+[ext_resource type="PackedScene" uid="uid://cqgdo65so8o5i" path="res://player.tscn" id="2_wlxy5"]
+[ext_resource type="PackedScene" uid="uid://5xk31mo4pkjb" path="res://AI_player.tscn" id="3_3v7ru"]
 [ext_resource type="AudioStream" uid="uid://cgiqms4u6x02q" path="res://source/Audio/Soundtrack/GobbleNoMore With VOICE.ogg" id="4_r3fl7"]
 [ext_resource type="Texture2D" uid="uid://c15kebgjltkts" path="res://source/Sprites/btn_back.png" id="5_wc5p8"]
 [ext_resource type="Texture2D" uid="uid://b1xlrvuv2630s" path="res://source/Sprites/btn_1ply.png" id="6_jsk3o"]
+[ext_resource type="Script" uid="uid://cg4g76wak6i5" path="res://FoodSpawner.gd" id="9_4arys"]
+[ext_resource type="PackedScene" uid="uid://tyyhpq8a87ae" path="res://Food.tscn" id="10_6iypd"]
+[ext_resource type="Texture2D" uid="uid://dmf8v7uixowel" path="res://source/Sprites/FencePostnew.png" id="10_tereu"]
+[ext_resource type="PackedScene" uid="uid://uerpca1hcvb2" path="res://hand.tscn" id="12_cdqbm"]
+[ext_resource type="PackedScene" uid="uid://cdmdmvrx12ay7" path="res://SunRotator.tscn" id="15_3v7ru"]
+[ext_resource type="Shader" uid="uid://e40sa77gngtw" path="res://palette_dither.gdshader" id="15_tcnuu"]
 
 [sub_resource type="Environment" id="Environment_noarx"]
 
@@ -118,45 +125,47 @@ background_color = Color(0.234145, 0.529179, 0.786127, 1)
 ambient_light_color = Color(0.746954, 0.555336, 0, 1)
 ambient_light_energy = 5.61
 
-[node name="Node3D" type="Node3D"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wlxy5"]
+shader = ExtResource("15_tcnuu")
+shader_parameter/shadow_threshold = 0.2
+
+[node name="Main" type="Node3D" node_paths=PackedStringArray("press_start_sprite", "food_spawner", "sun_rotator")]
 script = ExtResource("1_a0tk4")
-spawn_radius = 4.0
+player_scene = ExtResource("2_wlxy5")
+ai_scene = ExtResource("3_3v7ru")
+hand_scene = ExtResource("12_cdqbm")
+press_start_sprite = NodePath("Camera3D/AnimatedSprite3D")
+food_spawner = NodePath("Foodspawner")
+sun_rotator = NodePath("Death_Arena/SunRotator")
 
 [node name="hills" type="Sprite3D" parent="."]
-transform = Transform3D(-1.6470981, -0.061457727, -0.7297658, 0.02187871, 1.5730399, -0.30760294, 0.6076967, -0.22320896, -1.9668767, -5.816085, 2.94734, -8.17102)
+transform = Transform3D(-1.6470981, -0.061457727, -0.7297658, 0.02187871, 1.5730399, -0.30760294, 0.6076967, -0.22320896, -1.9668767, -5.816085, 2.94734, -9.5636)
 texture = ExtResource("2_jka67")
 
 [node name="Sprite3D" type="Sprite3D" parent="hills"]
 transform = Transform3D(-1.73695, 0.086317, -0.287336, 0.129313, 1.56946, -0.301577, 0.221303, -0.239593, -2.079, 10.0012, -0.168994, -1.05449)
 texture = ExtResource("2_jka67")
 
-[node name="Sprite3D2" type="Sprite3D" parent="hills"]
-transform = Transform3D(-1.7403661, 0.067018375, 0.26551253, 0.04145185, 1.572498, -0.30960315, -0.22824955, -0.2254292, -2.0807202, 1.9792087, 1.3031836, 7.3580375)
-texture = ExtResource("3_jsk3o")
-
 [node name="hills2" type="Sprite3D" parent="."]
-transform = Transform3D(-1.5016143, 0.13628638, 1.083656, 0.02187871, 1.5730399, -0.30760294, -0.90960586, -0.18715052, -1.7963443, 9.986649, 2.94734, -6.016591)
+transform = Transform3D(-1.5016143, 0.13628638, 1.083656, 0.02187871, 1.5730399, -0.30760294, -0.90960586, -0.18715052, -1.7963443, 9.986649, 2.94734, -7.4091716)
 texture = ExtResource("2_jka67")
 
 [node name="Sprite3D" type="Sprite3D" parent="hills2"]
 transform = Transform3D(-1.73695, 0.086317, -0.287336, 0.129313, 1.56946, -0.301577, 0.221303, -0.239593, -2.079, 10.0012, -0.168994, -1.05449)
 texture = ExtResource("2_jka67")
 
-[node name="Sprite3D2" type="Sprite3D" parent="hills2"]
-transform = Transform3D(-1.7403661, 0.067018375, 0.26551253, 0.04145185, 1.572498, -0.30960315, -0.22824955, -0.2254292, -2.0807202, 1.9792087, 1.3031836, 7.3580375)
-texture = ExtResource("3_jsk3o")
-
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.84405684, 0.5362537, 0, -0.5362537, 0.84405684, -0.0328903, 6.5358176, 8.301577)
+transform = Transform3D(1, 0, 0, 0, 0.84405684, 0.5362537, 0, -0.5362537, 0.84405684, -0.0328903, 6.5358176, 6.908996)
 environment = SubResource("Environment_noarx")
 
 [node name="GobbleNoMoreWithVoice" type="AudioStreamPlayer" parent="Camera3D"]
 stream = ExtResource("4_r3fl7")
+volume_db = -32.669
 autoplay = true
 parameters/looping = true
 
 [node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="Camera3D"]
-transform = Transform3D(0.853041, -0.228032, 0.469385, 0.228032, 0.971939, 0.0577616, -0.469385, 0.0577616, 0.881102, -3.22406, 1.1152, -6.25322)
+transform = Transform3D(0.853041, -0.228032, 0.469385, 0.22803198, 0.971939, 0.05776164, -0.46938503, 0.05776164, 0.88110197, -3.231077, 2.0151832, -7.666211)
 sprite_frames = SubResource("SpriteFrames_wc5p8")
 animation = &"title"
 autoplay = "title"
@@ -177,52 +186,13 @@ sprite_frames = SubResource("SpriteFrames_tcnuu")
 frame_progress = 0.918701
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
-transform = Transform3D(0.581957, 0, 0, 0, 1, 0, 0, 0, 0.216666, 0, 0, 0)
+transform = Transform3D(0.581957, 0, 0, 0, 1, 0, 0, 0, 0.216666, 0, 0, -1.3925804)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
 shape = SubResource("BoxShape3D_4xowi")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
-material_override = SubResource("StandardMaterial3D_noarx")
-mesh = SubResource("BoxMesh_a202f")
-
-[node name="StaticBody3D2" type="StaticBody3D" parent="."]
-transform = Transform3D(0.21326615, 0, 0, 0, 1, 0, 0, 0, 0.04766016, 0, 0.9278846, -4.1819057)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D2"]
-shape = SubResource("BoxShape3D_4xowi")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D2"]
-material_override = SubResource("StandardMaterial3D_noarx")
-mesh = SubResource("BoxMesh_a202f")
-
-[node name="StaticBody3D3" type="StaticBody3D" parent="."]
-transform = Transform3D(0.21326615, 0, 0, 0, 1, 0, 0, 0, 0.04766016, 0, 0.9278846, 7.2701464)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D3"]
-shape = SubResource("BoxShape3D_4xowi")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D3"]
-material_override = SubResource("StandardMaterial3D_noarx")
-mesh = SubResource("BoxMesh_a202f")
-
-[node name="StaticBody3D4" type="StaticBody3D" parent="."]
-transform = Transform3D(-0.028889062, 0, 0, 0, 1, 0, 0, 0, 0.12947693, 5.982399, 0.9278846, 2.2870293)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D4"]
-shape = SubResource("BoxShape3D_4xowi")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D4"]
-material_override = SubResource("StandardMaterial3D_noarx")
-mesh = SubResource("BoxMesh_a202f")
-
-[node name="StaticBody3D5" type="StaticBody3D" parent="."]
-transform = Transform3D(0.03034372, 0, 0, 0, 1, 0, 0, 0, 0.12947693, -5.8269053, 0.9278846, 2.2870293)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D5"]
-shape = SubResource("BoxShape3D_4xowi")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.05743854, 9.536743e-07, -0.0033631325)
 material_override = SubResource("StandardMaterial3D_noarx")
 mesh = SubResource("BoxMesh_a202f")
 
@@ -230,7 +200,1035 @@ mesh = SubResource("BoxMesh_a202f")
 environment = SubResource("Environment_a202f")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.961451, -0.177639, 0.209898, 0.274777, -0.649786, 0.708713, 0.0104937, 0.739068, 0.673549, 0.648899, 4.1468, 7.82354)
+transform = Transform3D(-0.96145076, -0.1776386, 0.2098976, 0.27477694, -0.6497865, 0.70871377, 0.010493698, 0.7390684, 0.6735487, 0.648899, 4.1468, 6.4309597)
 light_color = Color(1, 0.897248, 0.986769, 1)
 shadow_enabled = true
 shadow_bias = 0.235
+
+[node name="Foodspawner" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.3925804)
+script = ExtResource("9_4arys")
+food_scene = ExtResource("10_6iypd")
+
+[node name="Timer" type="Timer" parent="Foodspawner"]
+
+[node name="Death_Arena" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.3925804)
+
+[node name="fencefar" type="StaticBody3D" parent="Death_Arena"]
+transform = Transform3D(0.21326615, 0, 0, 0, 1, 0, 0, 0, 0.04766016, 0, 0.9278846, -4.1819057)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Death_Arena/fencefar"]
+shape = SubResource("BoxShape3D_4xowi")
+
+[node name="fenceclose" type="StaticBody3D" parent="Death_Arena"]
+transform = Transform3D(0.21326615, 0, 0, 0, 2.8796332, 0, 0, 0, 0.15557818, 0, 0.9278846, 11.402495)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Death_Arena/fenceclose"]
+shape = SubResource("BoxShape3D_4xowi")
+
+[node name="fenceright" type="StaticBody3D" parent="Death_Arena"]
+transform = Transform3D(-0.028889062, 0, 0, 0, 2.5679827, 0, 0, 0, 0.12947693, 5.982399, 0.9278846, 2.2870293)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Death_Arena/fenceright"]
+transform = Transform3D(1, 0, 0, 0, 0.9999996, 0, 0, 0, 0.9999994, 0, 0, 0)
+shape = SubResource("BoxShape3D_4xowi")
+
+[node name="fenceleft" type="StaticBody3D" parent="Death_Arena"]
+transform = Transform3D(0.03034372, 0, 0, 0, 1, 0, 0, 0, 0.12947693, -5.8269053, 0.9278846, 2.2870293)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Death_Arena/fenceleft"]
+shape = SubResource("BoxShape3D_4xowi")
+
+[node name="Node3D" type="Node3D" parent="Death_Arena"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2477103, 0.94974685, -2.3507223)
+
+[node name="Fencepost2" type="Sprite3D" parent="Death_Arena/Node3D"]
+pixel_size = 0.02
+alpha_cut = 2
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("10_tereu")
+
+[node name="Fencepost3" type="Sprite3D" parent="Death_Arena/Node3D"]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, -0.45351702, 0.1965648, 0)
+pixel_size = 0.02
+alpha_cut = 2
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("10_tereu")
+
+[node name="Fencepost4" type="Sprite3D" parent="Death_Arena/Node3D"]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, -0.45351702, -0.15266812, 0)
+pixel_size = 0.02
+alpha_cut = 2
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("10_tereu")
+
+[node name="Fencepost5" type="Sprite3D" parent="Death_Arena/Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.9026693, 0, 0)
+pixel_size = 0.02
+alpha_cut = 2
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("10_tereu")
+
+[node name="Fencepost6" type="Sprite3D" parent="Death_Arena/Node3D"]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 0.4491521, 0.1965648, 0)
+pixel_size = 0.02
+alpha_cut = 2
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("10_tereu")
+
+[node name="Fencepost7" type="Sprite3D" parent="Death_Arena/Node3D"]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 0.4491521, -0.15266812, 0)
+pixel_size = 0.02
+alpha_cut = 2
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("10_tereu")
+
+[node name="Fencepost8" type="Sprite3D" parent="Death_Arena/Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8065456, 0, 0)
+pixel_size = 0.02
+alpha_cut = 2
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("10_tereu")
+
+[node name="Fencepost9" type="Sprite3D" parent="Death_Arena/Node3D"]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 1.3530284, 0.1965648, 0)
+pixel_size = 0.02
+alpha_cut = 2
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("10_tereu")
+
+[node name="Fencepost10" type="Sprite3D" parent="Death_Arena/Node3D"]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 1.3530284, -0.15266812, 0)
+pixel_size = 0.02
+alpha_cut = 2
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("10_tereu")
+
+[node name="Fencepost11" type="Sprite3D" parent="Death_Arena/Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.687396, 0, 0)
+pixel_size = 0.02
+alpha_cut = 2
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("10_tereu")
+
+[node name="Fencepost12" type="Sprite3D" parent="Death_Arena/Node3D"]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 2.2338786, 0.1965648, 0)
+pixel_size = 0.02
+alpha_cut = 2
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("10_tereu")
+
+[node name="Fencepost13" type="Sprite3D" parent="Death_Arena/Node3D"]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 2.2338786, -0.15266812, 0)
+pixel_size = 0.02
+alpha_cut = 2
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("10_tereu")
+
+[node name="Fencepost14" type="Sprite3D" parent="Death_Arena/Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.6472516, 0, 0)
+pixel_size = 0.02
+alpha_cut = 2
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("10_tereu")
+
+[node name="Fencepost15" type="Sprite3D" parent="Death_Arena/Node3D"]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 3.1937346, 0.1965648, 0)
+pixel_size = 0.02
+alpha_cut = 2
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("10_tereu")
+
+[node name="Fencepost16" type="Sprite3D" parent="Death_Arena/Node3D"]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 3.1937346, -0.15266812, 0)
+pixel_size = 0.02
+alpha_cut = 2
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("10_tereu")
+
+[node name="Fencepost17" type="Sprite3D" parent="Death_Arena/Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.488972, 0, 0)
+pixel_size = 0.02
+alpha_cut = 2
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("10_tereu")
+
+[node name="Fencepost18" type="Sprite3D" parent="Death_Arena/Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5979395, 0, 0)
+pixel_size = 0.02
+alpha_cut = 2
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("10_tereu")
+
+[node name="Fencepost19" type="Sprite3D" parent="Death_Arena/Node3D"]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, -5.0514565, 0.1965648, 0)
+pixel_size = 0.02
+alpha_cut = 2
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("10_tereu")
+
+[node name="Fencepost20" type="Sprite3D" parent="Death_Arena/Node3D"]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, -5.0514565, -0.15266812, 0)
+pixel_size = 0.02
+alpha_cut = 2
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("10_tereu")
+
+[node name="Fencepost33" type="Sprite3D" parent="Death_Arena/Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.2477746, 0, 0)
+pixel_size = 0.02
+alpha_cut = 2
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("10_tereu")
+
+[node name="Fencepost34" type="Sprite3D" parent="Death_Arena/Node3D"]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, -5.810259, 0.1965648, 0)
+pixel_size = 0.02
+alpha_cut = 2
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("10_tereu")
+
+[node name="Fencepost35" type="Sprite3D" parent="Death_Arena/Node3D"]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, -5.810259, -0.15266812, 0)
+pixel_size = 0.02
+alpha_cut = 2
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("10_tereu")
+
+[node name="Fencepost21" type="Sprite3D" parent="Death_Arena/Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.69527, 0, 0)
+pixel_size = 0.02
+alpha_cut = 2
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("10_tereu")
+
+[node name="Fencepost22" type="Sprite3D" parent="Death_Arena/Node3D"]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, -4.148787, 0.1965648, 0)
+pixel_size = 0.02
+alpha_cut = 2
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("10_tereu")
+
+[node name="Fencepost23" type="Sprite3D" parent="Death_Arena/Node3D"]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, -4.148787, -0.15266812, 0)
+pixel_size = 0.02
+alpha_cut = 2
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("10_tereu")
+
+[node name="Fencepost24" type="Sprite3D" parent="Death_Arena/Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.7913938, 0, 0)
+pixel_size = 0.02
+alpha_cut = 2
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("10_tereu")
+
+[node name="Fencepost25" type="Sprite3D" parent="Death_Arena/Node3D"]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, -3.244911, 0.1965648, 0)
+pixel_size = 0.02
+alpha_cut = 2
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("10_tereu")
+
+[node name="Fencepost26" type="Sprite3D" parent="Death_Arena/Node3D"]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, -3.244911, -0.15266812, 0)
+pixel_size = 0.02
+alpha_cut = 2
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("10_tereu")
+
+[node name="Fencepost27" type="Sprite3D" parent="Death_Arena/Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.9105434, 0, 0)
+pixel_size = 0.02
+alpha_cut = 2
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("10_tereu")
+
+[node name="Fencepost28" type="Sprite3D" parent="Death_Arena/Node3D"]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, -2.3640606, 0.1965648, 0)
+pixel_size = 0.02
+alpha_cut = 2
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("10_tereu")
+
+[node name="Fencepost29" type="Sprite3D" parent="Death_Arena/Node3D"]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, -2.3640606, -0.15266812, 0)
+pixel_size = 0.02
+alpha_cut = 2
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("10_tereu")
+
+[node name="Fencepost30" type="Sprite3D" parent="Death_Arena/Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.9506879, 0, 0)
+pixel_size = 0.02
+alpha_cut = 2
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("10_tereu")
+
+[node name="Fencepost31" type="Sprite3D" parent="Death_Arena/Node3D"]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, -1.4042048, 0.1965648, 0)
+pixel_size = 0.02
+alpha_cut = 2
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("10_tereu")
+
+[node name="Fencepost32" type="Sprite3D" parent="Death_Arena/Node3D"]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, -1.4042048, -0.15266812, 0)
+pixel_size = 0.02
+alpha_cut = 2
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("10_tereu")
+
+[node name="Fencepost36" type="Sprite3D" parent="Death_Arena/Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 7.6164627)
+pixel_size = 0.02
+alpha_cut = 2
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("10_tereu")
+
+[node name="Fencepost37" type="Sprite3D" parent="Death_Arena/Node3D"]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, -0.45351702, 0.1965648, 7.6164627)
+pixel_size = 0.02
+alpha_cut = 2
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("10_tereu")
+
+[node name="Fencepost38" type="Sprite3D" parent="Death_Arena/Node3D"]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, -0.45351702, -0.15266812, 7.6164627)
+pixel_size = 0.02
+alpha_cut = 2
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("10_tereu")
+
+[node name="Fencepost39" type="Sprite3D" parent="Death_Arena/Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.9026693, 0, 7.6164627)
+pixel_size = 0.02
+alpha_cut = 2
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("10_tereu")
+
+[node name="Fencepost40" type="Sprite3D" parent="Death_Arena/Node3D"]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 0.4491521, 0.1965648, 7.6164627)
+pixel_size = 0.02
+alpha_cut = 2
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("10_tereu")
+
+[node name="Fencepost41" type="Sprite3D" parent="Death_Arena/Node3D"]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 0.4491521, -0.15266812, 7.6164627)
+pixel_size = 0.02
+alpha_cut = 2
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("10_tereu")
+
+[node name="Fencepost42" type="Sprite3D" parent="Death_Arena/Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8065456, 0, 7.6164627)
+pixel_size = 0.02
+alpha_cut = 2
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("10_tereu")
+
+[node name="Fencepost43" type="Sprite3D" parent="Death_Arena/Node3D"]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 1.3530284, 0.1965648, 7.6164627)
+pixel_size = 0.02
+alpha_cut = 2
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("10_tereu")
+
+[node name="Fencepost44" type="Sprite3D" parent="Death_Arena/Node3D"]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 1.3530284, -0.15266812, 7.6164627)
+pixel_size = 0.02
+alpha_cut = 2
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("10_tereu")
+
+[node name="Fencepost45" type="Sprite3D" parent="Death_Arena/Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.687396, 0, 7.6164627)
+pixel_size = 0.02
+alpha_cut = 2
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("10_tereu")
+
+[node name="Fencepost46" type="Sprite3D" parent="Death_Arena/Node3D"]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 2.2338786, 0.1965648, 7.6164627)
+pixel_size = 0.02
+alpha_cut = 2
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("10_tereu")
+
+[node name="Fencepost47" type="Sprite3D" parent="Death_Arena/Node3D"]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 2.2338786, -0.15266812, 7.6164627)
+pixel_size = 0.02
+alpha_cut = 2
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("10_tereu")
+
+[node name="Fencepost48" type="Sprite3D" parent="Death_Arena/Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.6472516, 0, 7.6164627)
+pixel_size = 0.02
+alpha_cut = 2
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("10_tereu")
+
+[node name="Fencepost49" type="Sprite3D" parent="Death_Arena/Node3D"]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 3.1937346, 0.1965648, 7.6164627)
+pixel_size = 0.02
+alpha_cut = 2
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("10_tereu")
+
+[node name="Fencepost50" type="Sprite3D" parent="Death_Arena/Node3D"]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 3.1937346, -0.15266812, 7.6164627)
+pixel_size = 0.02
+alpha_cut = 2
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("10_tereu")
+
+[node name="Fencepost51" type="Sprite3D" parent="Death_Arena/Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.488972, 0, 7.6164627)
+pixel_size = 0.02
+alpha_cut = 2
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("10_tereu")
+
+[node name="Fencepost52" type="Sprite3D" parent="Death_Arena/Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5979395, 0, 7.6164627)
+pixel_size = 0.02
+alpha_cut = 2
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("10_tereu")
+
+[node name="Fencepost53" type="Sprite3D" parent="Death_Arena/Node3D"]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, -5.0514565, 0.1965648, 7.6164627)
+pixel_size = 0.02
+alpha_cut = 2
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("10_tereu")
+
+[node name="Fencepost54" type="Sprite3D" parent="Death_Arena/Node3D"]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, -5.0514565, -0.15266812, 7.6164627)
+pixel_size = 0.02
+alpha_cut = 2
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("10_tereu")
+
+[node name="Fencepost55" type="Sprite3D" parent="Death_Arena/Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.2477746, 0, 7.6164627)
+pixel_size = 0.02
+alpha_cut = 2
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("10_tereu")
+
+[node name="Fencepost56" type="Sprite3D" parent="Death_Arena/Node3D"]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, -5.810259, 0.1965648, 7.6164627)
+pixel_size = 0.02
+alpha_cut = 2
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("10_tereu")
+
+[node name="Fencepost57" type="Sprite3D" parent="Death_Arena/Node3D"]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, -5.810259, -0.15266812, 7.6164627)
+pixel_size = 0.02
+alpha_cut = 2
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("10_tereu")
+
+[node name="Fencepost58" type="Sprite3D" parent="Death_Arena/Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.69527, 0, 7.6164627)
+pixel_size = 0.02
+alpha_cut = 2
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("10_tereu")
+
+[node name="Fencepost59" type="Sprite3D" parent="Death_Arena/Node3D"]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, -4.148787, 0.1965648, 7.6164627)
+pixel_size = 0.02
+alpha_cut = 2
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("10_tereu")
+
+[node name="Fencepost60" type="Sprite3D" parent="Death_Arena/Node3D"]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, -4.148787, -0.15266812, 7.6164627)
+pixel_size = 0.02
+alpha_cut = 2
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("10_tereu")
+
+[node name="Fencepost61" type="Sprite3D" parent="Death_Arena/Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.7913938, 0, 7.6164627)
+pixel_size = 0.02
+alpha_cut = 2
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("10_tereu")
+
+[node name="Fencepost62" type="Sprite3D" parent="Death_Arena/Node3D"]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, -3.244911, 0.1965648, 7.6164627)
+pixel_size = 0.02
+alpha_cut = 2
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("10_tereu")
+
+[node name="Fencepost63" type="Sprite3D" parent="Death_Arena/Node3D"]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, -3.244911, -0.15266812, 7.6164627)
+pixel_size = 0.02
+alpha_cut = 2
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("10_tereu")
+
+[node name="Fencepost64" type="Sprite3D" parent="Death_Arena/Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.9105434, 0, 7.6164627)
+pixel_size = 0.02
+alpha_cut = 2
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("10_tereu")
+
+[node name="Fencepost65" type="Sprite3D" parent="Death_Arena/Node3D"]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, -2.3640606, 0.1965648, 7.6164627)
+pixel_size = 0.02
+alpha_cut = 2
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("10_tereu")
+
+[node name="Fencepost66" type="Sprite3D" parent="Death_Arena/Node3D"]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, -2.3640606, -0.15266812, 7.6164627)
+pixel_size = 0.02
+alpha_cut = 2
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("10_tereu")
+
+[node name="Fencepost67" type="Sprite3D" parent="Death_Arena/Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.9506879, 0, 7.6164627)
+pixel_size = 0.02
+alpha_cut = 2
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("10_tereu")
+
+[node name="Fencepost68" type="Sprite3D" parent="Death_Arena/Node3D"]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, -1.4042048, 0.1965648, 7.6164627)
+pixel_size = 0.02
+alpha_cut = 2
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("10_tereu")
+
+[node name="Fencepost69" type="Sprite3D" parent="Death_Arena/Node3D"]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, -1.4042048, -0.15266812, 7.6164627)
+pixel_size = 0.02
+alpha_cut = 2
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("10_tereu")
+
+[node name="Fencepost70" type="Sprite3D" parent="Death_Arena/Node3D"]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 3.8044105, -0.09894693, 6.120127)
+pixel_size = 0.02
+alpha_cut = 2
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("10_tereu")
+
+[node name="Fencepost71" type="Sprite3D" parent="Death_Arena/Node3D"]
+transform = Transform3D(1.9106855e-15, -4.371139e-08, -1, -1, -4.371139e-08, 0, -4.371139e-08, 1, -4.371139e-08, 3.8044105, 0.097617865, 5.6666102)
+pixel_size = 0.02
+alpha_cut = 2
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("10_tereu")
+
+[node name="Fencepost72" type="Sprite3D" parent="Death_Arena/Node3D"]
+transform = Transform3D(1.9106855e-15, -4.371139e-08, -1, -1, -4.371139e-08, 0, -4.371139e-08, 1, -4.371139e-08, 3.8044105, -0.25161505, 5.6666102)
+pixel_size = 0.02
+alpha_cut = 2
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("10_tereu")
+
+[node name="Fencepost73" type="Sprite3D" parent="Death_Arena/Node3D"]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 3.8044105, -0.09894693, 7.0227966)
+pixel_size = 0.02
+alpha_cut = 2
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("10_tereu")
+
+[node name="Fencepost74" type="Sprite3D" parent="Death_Arena/Node3D"]
+transform = Transform3D(1.9106855e-15, -4.371139e-08, -1, -1, -4.371139e-08, 0, -4.371139e-08, 1, -4.371139e-08, 3.8044105, 0.097617865, 6.569279)
+pixel_size = 0.02
+alpha_cut = 2
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("10_tereu")
+
+[node name="Fencepost75" type="Sprite3D" parent="Death_Arena/Node3D"]
+transform = Transform3D(1.9106855e-15, -4.371139e-08, -1, -1, -4.371139e-08, 0, -4.371139e-08, 1, -4.371139e-08, 3.8044105, -0.25161505, 6.569279)
+pixel_size = 0.02
+alpha_cut = 2
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("10_tereu")
+
+[node name="Fencepost77" type="Sprite3D" parent="Death_Arena/Node3D"]
+transform = Transform3D(1.9106855e-15, -4.371139e-08, -1, -1, -4.371139e-08, 0, -4.371139e-08, 1, -4.371139e-08, 3.8044105, 0.097617865, 7.2191777)
+pixel_size = 0.02
+alpha_cut = 2
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("10_tereu")
+
+[node name="Fencepost78" type="Sprite3D" parent="Death_Arena/Node3D"]
+transform = Transform3D(1.9106855e-15, -4.371139e-08, -1, -1, -4.371139e-08, 0, -4.371139e-08, 1, -4.371139e-08, 3.8044105, -0.25161505, 7.228833)
+pixel_size = 0.02
+alpha_cut = 2
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("10_tereu")
+
+[node name="Fencepost85" type="Sprite3D" parent="Death_Arena/Node3D"]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 3.804411, -0.09894693, 0.631155)
+pixel_size = 0.02
+alpha_cut = 2
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("10_tereu")
+
+[node name="Fencepost86" type="Sprite3D" parent="Death_Arena/Node3D"]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 3.8044105, -0.09894693, 1.5221877)
+pixel_size = 0.02
+alpha_cut = 2
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("10_tereu")
+
+[node name="Fencepost87" type="Sprite3D" parent="Death_Arena/Node3D"]
+transform = Transform3D(1.9106855e-15, -4.371139e-08, -1, -1, -4.371139e-08, 0, -4.371139e-08, 1, -4.371139e-08, 3.804411, 0.097617865, 1.0686707)
+pixel_size = 0.02
+alpha_cut = 2
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("10_tereu")
+
+[node name="Fencepost88" type="Sprite3D" parent="Death_Arena/Node3D"]
+transform = Transform3D(1.9106855e-15, -4.371139e-08, -1, -1, -4.371139e-08, 0, -4.371139e-08, 1, -4.371139e-08, 3.804411, -0.25161505, 1.0686707)
+pixel_size = 0.02
+alpha_cut = 2
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("10_tereu")
+
+[node name="Fencepost89" type="Sprite3D" parent="Death_Arena/Node3D"]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 3.804411, -0.09894693, -0.1276474)
+pixel_size = 0.02
+alpha_cut = 2
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("10_tereu")
+
+[node name="Fencepost90" type="Sprite3D" parent="Death_Arena/Node3D"]
+transform = Transform3D(1.9106855e-15, -4.371139e-08, -1, -1, -4.371139e-08, 0, -4.371139e-08, 1, -4.371139e-08, 3.804411, 0.097617865, 0.30986834)
+pixel_size = 0.02
+alpha_cut = 2
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("10_tereu")
+
+[node name="Fencepost91" type="Sprite3D" parent="Death_Arena/Node3D"]
+transform = Transform3D(1.9106855e-15, -4.371139e-08, -1, -1, -4.371139e-08, 0, -4.371139e-08, 1, -4.371139e-08, 3.804411, -0.25161505, 0.30986834)
+pixel_size = 0.02
+alpha_cut = 2
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("10_tereu")
+
+[node name="Fencepost92" type="Sprite3D" parent="Death_Arena/Node3D"]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 3.8044105, -0.09894693, 2.4248571)
+pixel_size = 0.02
+alpha_cut = 2
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("10_tereu")
+
+[node name="Fencepost93" type="Sprite3D" parent="Death_Arena/Node3D"]
+transform = Transform3D(1.9106855e-15, -4.371139e-08, -1, -1, -4.371139e-08, 0, -4.371139e-08, 1, -4.371139e-08, 3.8044105, 0.097617865, 1.9713403)
+pixel_size = 0.02
+alpha_cut = 2
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("10_tereu")
+
+[node name="Fencepost94" type="Sprite3D" parent="Death_Arena/Node3D"]
+transform = Transform3D(1.9106855e-15, -4.371139e-08, -1, -1, -4.371139e-08, 0, -4.371139e-08, 1, -4.371139e-08, 3.8044105, -0.25161505, 1.9713403)
+pixel_size = 0.02
+alpha_cut = 2
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("10_tereu")
+
+[node name="Fencepost95" type="Sprite3D" parent="Death_Arena/Node3D"]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 3.8044105, -0.09894693, 3.3287334)
+pixel_size = 0.02
+alpha_cut = 2
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("10_tereu")
+
+[node name="Fencepost96" type="Sprite3D" parent="Death_Arena/Node3D"]
+transform = Transform3D(1.9106855e-15, -4.371139e-08, -1, -1, -4.371139e-08, 0, -4.371139e-08, 1, -4.371139e-08, 3.8044105, 0.097617865, 2.8752165)
+pixel_size = 0.02
+alpha_cut = 2
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("10_tereu")
+
+[node name="Fencepost97" type="Sprite3D" parent="Death_Arena/Node3D"]
+transform = Transform3D(1.9106855e-15, -4.371139e-08, -1, -1, -4.371139e-08, 0, -4.371139e-08, 1, -4.371139e-08, 3.8044105, -0.25161505, 2.8752165)
+pixel_size = 0.02
+alpha_cut = 2
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("10_tereu")
+
+[node name="Fencepost98" type="Sprite3D" parent="Death_Arena/Node3D"]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 3.8044105, -0.09894693, 4.2095838)
+pixel_size = 0.02
+alpha_cut = 2
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("10_tereu")
+
+[node name="Fencepost99" type="Sprite3D" parent="Death_Arena/Node3D"]
+transform = Transform3D(1.9106855e-15, -4.371139e-08, -1, -1, -4.371139e-08, 0, -4.371139e-08, 1, -4.371139e-08, 3.8044105, 0.097617865, 3.7560663)
+pixel_size = 0.02
+alpha_cut = 2
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("10_tereu")
+
+[node name="Fencepost100" type="Sprite3D" parent="Death_Arena/Node3D"]
+transform = Transform3D(1.9106855e-15, -4.371139e-08, -1, -1, -4.371139e-08, 0, -4.371139e-08, 1, -4.371139e-08, 3.8044105, -0.25161505, 3.7560663)
+pixel_size = 0.02
+alpha_cut = 2
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("10_tereu")
+
+[node name="Fencepost101" type="Sprite3D" parent="Death_Arena/Node3D"]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 3.8044105, -0.09894693, 5.1694393)
+pixel_size = 0.02
+alpha_cut = 2
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("10_tereu")
+
+[node name="Fencepost102" type="Sprite3D" parent="Death_Arena/Node3D"]
+transform = Transform3D(1.9106855e-15, -4.371139e-08, -1, -1, -4.371139e-08, 0, -4.371139e-08, 1, -4.371139e-08, 3.8044105, 0.097617865, 4.7159224)
+pixel_size = 0.02
+alpha_cut = 2
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("10_tereu")
+
+[node name="Fencepost103" type="Sprite3D" parent="Death_Arena/Node3D"]
+transform = Transform3D(1.9106855e-15, -4.371139e-08, -1, -1, -4.371139e-08, 0, -4.371139e-08, 1, -4.371139e-08, 3.8044105, -0.25161505, 4.7159224)
+pixel_size = 0.02
+alpha_cut = 2
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("10_tereu")
+
+[node name="Fencepost76" type="Sprite3D" parent="Death_Arena/Node3D"]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -6.2742333, -0.09894693, 6.120127)
+pixel_size = 0.02
+alpha_cut = 2
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("10_tereu")
+
+[node name="Fencepost79" type="Sprite3D" parent="Death_Arena/Node3D"]
+transform = Transform3D(1.9106855e-15, -4.371139e-08, -1, -1, -4.371139e-08, 0, -4.371139e-08, 1, -4.371139e-08, -6.2742333, 0.097617865, 5.6666102)
+pixel_size = 0.02
+alpha_cut = 2
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("10_tereu")
+
+[node name="Fencepost80" type="Sprite3D" parent="Death_Arena/Node3D"]
+transform = Transform3D(1.9106855e-15, -4.371139e-08, -1, -1, -4.371139e-08, 0, -4.371139e-08, 1, -4.371139e-08, -6.2742333, -0.25161505, 5.6666102)
+pixel_size = 0.02
+alpha_cut = 2
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("10_tereu")
+
+[node name="Fencepost81" type="Sprite3D" parent="Death_Arena/Node3D"]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -6.2742333, -0.09894693, 7.0227966)
+pixel_size = 0.02
+alpha_cut = 2
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("10_tereu")
+
+[node name="Fencepost82" type="Sprite3D" parent="Death_Arena/Node3D"]
+transform = Transform3D(1.9106855e-15, -4.371139e-08, -1, -1, -4.371139e-08, 0, -4.371139e-08, 1, -4.371139e-08, -6.2742333, 0.097617865, 6.569279)
+pixel_size = 0.02
+alpha_cut = 2
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("10_tereu")
+
+[node name="Fencepost83" type="Sprite3D" parent="Death_Arena/Node3D"]
+transform = Transform3D(1.9106855e-15, -4.371139e-08, -1, -1, -4.371139e-08, 0, -4.371139e-08, 1, -4.371139e-08, -6.2742333, -0.25161505, 6.569279)
+pixel_size = 0.02
+alpha_cut = 2
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("10_tereu")
+
+[node name="Fencepost84" type="Sprite3D" parent="Death_Arena/Node3D"]
+transform = Transform3D(1.9106855e-15, -4.371139e-08, -1, -1, -4.371139e-08, 0, -4.371139e-08, 1, -4.371139e-08, -6.2742333, 0.097617865, 7.2191777)
+pixel_size = 0.02
+alpha_cut = 2
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("10_tereu")
+
+[node name="Fencepost104" type="Sprite3D" parent="Death_Arena/Node3D"]
+transform = Transform3D(1.9106855e-15, -4.371139e-08, -1, -1, -4.371139e-08, 0, -4.371139e-08, 1, -4.371139e-08, -6.2742333, -0.25161505, 7.228833)
+pixel_size = 0.02
+alpha_cut = 2
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("10_tereu")
+
+[node name="Fencepost105" type="Sprite3D" parent="Death_Arena/Node3D"]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -6.274233, -0.09894693, 0.631155)
+pixel_size = 0.02
+alpha_cut = 2
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("10_tereu")
+
+[node name="Fencepost106" type="Sprite3D" parent="Death_Arena/Node3D"]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -6.2742333, -0.09894693, 1.5221877)
+pixel_size = 0.02
+alpha_cut = 2
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("10_tereu")
+
+[node name="Fencepost107" type="Sprite3D" parent="Death_Arena/Node3D"]
+transform = Transform3D(1.9106855e-15, -4.371139e-08, -1, -1, -4.371139e-08, 0, -4.371139e-08, 1, -4.371139e-08, -6.274233, 0.097617865, 1.0686707)
+pixel_size = 0.02
+alpha_cut = 2
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("10_tereu")
+
+[node name="Fencepost108" type="Sprite3D" parent="Death_Arena/Node3D"]
+transform = Transform3D(1.9106855e-15, -4.371139e-08, -1, -1, -4.371139e-08, 0, -4.371139e-08, 1, -4.371139e-08, -6.274233, -0.25161505, 1.0686707)
+pixel_size = 0.02
+alpha_cut = 2
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("10_tereu")
+
+[node name="Fencepost109" type="Sprite3D" parent="Death_Arena/Node3D"]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -6.274233, -0.09894693, -0.1276474)
+pixel_size = 0.02
+alpha_cut = 2
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("10_tereu")
+
+[node name="Fencepost110" type="Sprite3D" parent="Death_Arena/Node3D"]
+transform = Transform3D(1.9106855e-15, -4.371139e-08, -1, -1, -4.371139e-08, 0, -4.371139e-08, 1, -4.371139e-08, -6.274233, 0.097617865, 0.30986834)
+pixel_size = 0.02
+alpha_cut = 2
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("10_tereu")
+
+[node name="Fencepost111" type="Sprite3D" parent="Death_Arena/Node3D"]
+transform = Transform3D(1.9106855e-15, -4.371139e-08, -1, -1, -4.371139e-08, 0, -4.371139e-08, 1, -4.371139e-08, -6.274233, -0.25161505, 0.30986834)
+pixel_size = 0.02
+alpha_cut = 2
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("10_tereu")
+
+[node name="Fencepost112" type="Sprite3D" parent="Death_Arena/Node3D"]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -6.2742333, -0.09894693, 2.4248571)
+pixel_size = 0.02
+alpha_cut = 2
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("10_tereu")
+
+[node name="Fencepost113" type="Sprite3D" parent="Death_Arena/Node3D"]
+transform = Transform3D(1.9106855e-15, -4.371139e-08, -1, -1, -4.371139e-08, 0, -4.371139e-08, 1, -4.371139e-08, -6.2742333, 0.097617865, 1.9713403)
+pixel_size = 0.02
+alpha_cut = 2
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("10_tereu")
+
+[node name="Fencepost114" type="Sprite3D" parent="Death_Arena/Node3D"]
+transform = Transform3D(1.9106855e-15, -4.371139e-08, -1, -1, -4.371139e-08, 0, -4.371139e-08, 1, -4.371139e-08, -6.2742333, -0.25161505, 1.9713403)
+pixel_size = 0.02
+alpha_cut = 2
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("10_tereu")
+
+[node name="Fencepost115" type="Sprite3D" parent="Death_Arena/Node3D"]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -6.2742333, -0.09894693, 3.3287334)
+pixel_size = 0.02
+alpha_cut = 2
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("10_tereu")
+
+[node name="Fencepost116" type="Sprite3D" parent="Death_Arena/Node3D"]
+transform = Transform3D(1.9106855e-15, -4.371139e-08, -1, -1, -4.371139e-08, 0, -4.371139e-08, 1, -4.371139e-08, -6.2742333, 0.097617865, 2.8752165)
+pixel_size = 0.02
+alpha_cut = 2
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("10_tereu")
+
+[node name="Fencepost117" type="Sprite3D" parent="Death_Arena/Node3D"]
+transform = Transform3D(1.9106855e-15, -4.371139e-08, -1, -1, -4.371139e-08, 0, -4.371139e-08, 1, -4.371139e-08, -6.2742333, -0.25161505, 2.8752165)
+pixel_size = 0.02
+alpha_cut = 2
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("10_tereu")
+
+[node name="Fencepost118" type="Sprite3D" parent="Death_Arena/Node3D"]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -6.2742333, -0.09894693, 4.2095838)
+pixel_size = 0.02
+alpha_cut = 2
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("10_tereu")
+
+[node name="Fencepost119" type="Sprite3D" parent="Death_Arena/Node3D"]
+transform = Transform3D(1.9106855e-15, -4.371139e-08, -1, -1, -4.371139e-08, 0, -4.371139e-08, 1, -4.371139e-08, -6.2742333, 0.097617865, 3.7560663)
+pixel_size = 0.02
+alpha_cut = 2
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("10_tereu")
+
+[node name="Fencepost120" type="Sprite3D" parent="Death_Arena/Node3D"]
+transform = Transform3D(1.9106855e-15, -4.371139e-08, -1, -1, -4.371139e-08, 0, -4.371139e-08, 1, -4.371139e-08, -6.2742333, -0.25161505, 3.7560663)
+pixel_size = 0.02
+alpha_cut = 2
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("10_tereu")
+
+[node name="Fencepost121" type="Sprite3D" parent="Death_Arena/Node3D"]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -6.2742333, -0.09894693, 5.1694393)
+pixel_size = 0.02
+alpha_cut = 2
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("10_tereu")
+
+[node name="Fencepost122" type="Sprite3D" parent="Death_Arena/Node3D"]
+transform = Transform3D(1.9106855e-15, -4.371139e-08, -1, -1, -4.371139e-08, 0, -4.371139e-08, 1, -4.371139e-08, -6.2742333, 0.097617865, 4.7159224)
+pixel_size = 0.02
+alpha_cut = 2
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("10_tereu")
+
+[node name="Fencepost123" type="Sprite3D" parent="Death_Arena/Node3D"]
+transform = Transform3D(1.9106855e-15, -4.371139e-08, -1, -1, -4.371139e-08, 0, -4.371139e-08, 1, -4.371139e-08, -6.2742333, -0.25161505, 4.7159224)
+pixel_size = 0.02
+alpha_cut = 2
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("10_tereu")
+
+[node name="SunRotator" parent="Death_Arena" instance=ExtResource("15_3v7ru")]
+transform = Transform3D(2.3553712, 0, 0, 0, 1, 0, 0, 0, 3.7203603, 0, 3.7160254, -20.148449)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+visible = false
+material = SubResource("ShaderMaterial_wlxy5")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2

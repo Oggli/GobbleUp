@@ -2,21 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dup4a0if6578o"
-path.s3tc="res://.godot/imported/sun.png-3c53aff48ef7b0dc8de327fc54b08b46.s3tc.ctex"
+uid="uid://cfkx3qe8c6eou"
+path="res://.godot/imported/Autumn palette.png-567e816a60d8db818401c8cab2e0846a.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
-source_file="res://source/Sprites/sun.png"
-dest_files=["res://.godot/imported/sun.png-3c53aff48ef7b0dc8de327fc54b08b46.s3tc.ctex"]
+source_file="res://source/Sprites/Autumn palette.png"
+dest_files=["res://.godot/imported/Autumn palette.png-567e816a60d8db818401c8cab2e0846a.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0
@@ -24,7 +23,7 @@ compress/rdo_quality_loss=0.0
 compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0
-mipmaps/generate=true
+mipmaps/generate=false
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""
@@ -38,4 +37,4 @@ process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
-detect_3d/compress_to=0
+detect_3d/compress_to=1

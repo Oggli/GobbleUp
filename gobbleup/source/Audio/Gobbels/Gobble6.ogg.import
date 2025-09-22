@@ -13,7 +13,7 @@ dest_files=["res://.godot/imported/Gobble6.ogg-06cec339af3873bb38db104b16472263.
 [params]
 
 loop=false
-loop_offset=0
-bpm=0
+loop_offset=0.0
+bpm=0.0
 beat_count=0
 bar_beats=4

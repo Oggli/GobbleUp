@@ -1,90 +1,104 @@
+# ai_player.gd
+extends "res://Turkey.gd"
 
-extends RigidBody3D
+# --- AI State Machine ---
+enum State { WANDERING, PUSHING_TO_FOOD, AVOIDING_FOOD }
+var current_state := State.WANDERING
 
-
-@export var speed := 20.0
+# --- AI Configuration ---
 @export var wander_change_interval := 3.0
 
-
-enum State { WANDERING, PUSHING_TO_FOOD }
-
-var current_state := State.WANDERING
+# --- AI State Variables ---
 var wander_direction := Vector3.ZERO
 var food_target: Node3D = null
-var push_target: RigidBody3D = null
+var push_target: Node3D = null
 
+# --- Node References ---
 @onready var wander_timer: Timer = $WanderTimer
 @onready var food_detector: Area3D = $FoodDetector
-@onready var sprite: Sprite3D = $Sprite3D
+
 
 func _ready():
-	print("AI Turkey spawned.")
-	add_to_group("players") 
+	add_to_group("players")
+	
+	# Setup Timer
 	wander_timer.wait_time = wander_change_interval
 	wander_timer.timeout.connect(_on_wander_timer_timeout)
 	wander_timer.start()
-	_pick_random_direction()
-	
+
+	# Setup Detector Signals
 	food_detector.body_entered.connect(_on_food_detector_body_entered)
-	food_detector.body_exited.connect(_on_food_detector_body_exited)
+	food_detector.area_entered.connect(_on_food_detector_area_entered)
+	food_detector.body_exited.connect(_on_food_detector_target_exited)
+	food_detector.area_exited.connect(_on_food_detector_target_exited)
+	
+	change_state(State.WANDERING)
 
 
-func _physics_process(delta: float):
+# This function provides the movement direction to the base Turkey.gd script.
+func get_movement_direction() -> Vector3:
 	match current_state:
 		State.WANDERING:
-			linear_velocity += wander_direction * speed * delta
-
+			return wander_direction
+			
 		State.PUSHING_TO_FOOD:
 			if is_instance_valid(food_target) and is_instance_valid(push_target):
-
 				var player_pos = push_target.global_position
 				var food_pos = food_target.global_position
 				var ram_direction = (player_pos - food_pos).normalized()
 				var ram_position = player_pos + ram_direction
+				return (ram_position - global_position).normalized()
 				
-
-				var direction_to_ram = (ram_position - global_position).normalized()
-				linear_velocity += direction_to_ram * speed * delta
-			else:
-
-				find_new_targets()
-
-
-
-	if abs(linear_velocity.x) > 0.1:
-		sprite.flip_h = linear_velocity.x < 0.0
+		State.AVOIDING_FOOD:
+			if is_instance_valid(food_target):
+				return (global_position - food_target.global_position).normalized()
+	
+	# By default, stand still
+	return Vector3.ZERO
 
 
+# --- AI Logic and State Management ---
 
-func _on_food_detector_body_entered(body: Node):
-	if body.is_in_group("food"):
-		print("AI detected food!")
-		current_state = State.PUSHING_TO_FOOD
-		find_new_targets()
+func change_state(new_state):
+	if new_state == current_state:
+		return
+		
+	current_state = new_state
+	match current_state:
+		State.WANDERING:
+			print(name, " State -> WANDERING")
+		State.PUSHING_TO_FOOD:
+			print(name, " State -> PUSHING TO FOOD")
+		State.AVOIDING_FOOD:
+			print(name, " State -> AVOIDING FOOD")
 
-func _on_food_detector_body_exited(body: Node):
-	if body == food_target:
-		print("AI lost food target.")
-		food_target = null
-		push_target = null
-		current_state = State.WANDERING
+
+func _make_food_decision():
+	find_new_targets()
+	
+	if is_instance_valid(food_target) and is_instance_valid(push_target):
+		change_state(State.PUSHING_TO_FOOD)
+	elif is_instance_valid(food_target):
+		change_state(State.AVOIDING_FOOD)
+	else:
+		change_state(State.WANDERING)
+
 
 func find_new_targets():
 	var overlapping_bodies = food_detector.get_overlapping_bodies()
-	
+	var overlapping_areas = food_detector.get_overlapping_areas()
 
 	var closest_food: Node3D = null
 	var min_dist_sq = INF
-	for body in overlapping_bodies:
-		if body.is_in_group("food"):
-			var dist_sq = global_position.distance_squared_to(body.global_position)
+	for area in overlapping_areas:
+		if area.is_in_group("food"):
+			var dist_sq = global_position.distance_squared_to(area.global_position)
 			if dist_sq < min_dist_sq:
 				min_dist_sq = dist_sq
-				closest_food = body
+				closest_food = area
 	food_target = closest_food
 
-
-	var closest_player: RigidBody3D = null
+	var closest_player: Node3D = null
 	min_dist_sq = INF
 	for body in overlapping_bodies:
 		if body.is_in_group("players") and body != self:
@@ -93,17 +107,35 @@ func find_new_targets():
 				min_dist_sq = dist_sq
 				closest_player = body
 	push_target = closest_player
-	
 
-	if not is_instance_valid(food_target) or not is_instance_valid(push_target):
-		current_state = State.WANDERING
+func on_wall_collision():
+	# If we hit a wall AND we are in the wandering state...
+	if current_state == State.WANDERING:
+		# ...immediately pick a new direction to go.
+		_pick_random_direction()
+
+# --- Signal Handlers ---
+
+func _on_food_detector_area_entered(area: Area3D):
+	if area.is_in_group("food"):
+		_make_food_decision()
 
 
+func _on_food_detector_body_entered(body: Node):
+	if body.is_in_group("players"):
+		_make_food_decision()
+
+
+func _on_food_detector_target_exited(target: Node):
+	if target == food_target or target == push_target:
+		_make_food_decision()
 
 
 func _on_wander_timer_timeout():
-	_pick_random_direction()
+	if current_state == State.WANDERING:
+		_pick_random_direction()
+
 
 func _pick_random_direction():
-	var random_angle = randf_range(0, TAU) 
+	var random_angle = randf_range(0, TAU)
 	wander_direction = Vector3(cos(random_angle), 0, sin(random_angle))
